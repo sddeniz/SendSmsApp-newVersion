@@ -1,6 +1,7 @@
 package com.behsa.smsGw.Entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @NamedStoredProcedureQuery(
@@ -13,36 +14,36 @@ import javax.persistence.*;
                 @StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class, name = "P_RESPONSE_DESC")
         }
 )
-public class UserLogin {
+public class UserLogin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private String username;
+    private String P_USERNAME;
 
     @Column
-    private String password;
+    private String P_PASSWORD;
 
-    public String getUsername() {
-        return username;
+    public String getP_USERNAME() {
+        return P_USERNAME;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setP_USERNAME(String p_USERNAME) {
+        P_USERNAME = p_USERNAME;
     }
 
-    public String getPassword() {
-        return password;
+    public String getP_PASSWORD() {
+        return P_PASSWORD;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setP_PASSWORD(String p_PASSWORD) {
+        P_PASSWORD = p_PASSWORD;
     }
 
     @Override
     public String toString() {
         return "UserLogin{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                "P_USERNAME='" + P_USERNAME + '\'' +
+                ", P_PASSWORD='" + P_PASSWORD + '\'' +
                 '}';
     }
 }

@@ -10,11 +10,6 @@
 
     <appender name="ERROR_ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>logs/logfile.log</file>
-<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
-<!--            <level>ERROR</level>-->
-<!--            <onMatch>ACCEPT</onMatch>-->
-<!--            <onMismatch>DENY</onMismatch>-->
-<!--        </filter>-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily -->
             <fileNamePattern>logs/log--error-%d{yyyy-MM-dd}.%i.zip
