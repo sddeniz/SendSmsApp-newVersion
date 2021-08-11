@@ -3,6 +3,16 @@ package com.behsa.smsGw.Entity;
 import javax.persistence.*;
 
 @Entity
+@NamedStoredProcedureQuery(
+        name = "PRC_LOGIN",
+        procedureName = "PKG_AUTHENTICATION.PRC_LOGIN",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "P_USERNAME"),
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "P_PASSWORD"),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, type = Long.class, name = "P_RESPONSE_TYPE"),
+                @StoredProcedureParameter(mode = ParameterMode.OUT, type = String.class, name = "P_RESPONSE_DESC")
+        }
+)
 public class UserLogin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

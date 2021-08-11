@@ -1,6 +1,7 @@
 package com.behsa.smsGw;
 
 import com.behsa.smsGw.Entity.UserLogin;
+import com.behsa.smsGw.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

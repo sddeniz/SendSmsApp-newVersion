@@ -1,4 +1,4 @@
-package com.behsa.smsGw;
+package com.behsa.smsGw.Repository;
 
 import com.behsa.smsGw.Entity.UserLogin;
 import org.springframework.data.jpa.repository.JpaRepository;
