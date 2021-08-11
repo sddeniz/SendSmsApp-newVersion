@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p [YourApp:%thread:%X{X-B3-TraceId}:%X{X-B3-SpanId}] %logger{40} -
+                %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR_ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/logfile.log</file>
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--            <level>ERROR</level>-->
+<!--            <onMatch>ACCEPT</onMatch>-->
+<!--            <onMismatch>DENY</onMismatch>-->
+<!--        </filter>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>logs/log--error-%d{yyyy-MM-dd}.%i.zip
+            </fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>
+                {
+                "INS_level": "%level",
+                "time": "%date{ISO8601}"
+                "traceId": "%X{X-B3-TraceId:-}",
+                "spanId": "%X{X-B3-SpanId:-}",
+                "thread": "%thread",
+                "class": "%logger{40}",
+                "message": "%message"
+                }
+            </pattern>
+
+        </encoder>
+    </appender>
+    <root level="info">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="ERROR_ROLLING"/>
+    </root>
+
+</configuration>

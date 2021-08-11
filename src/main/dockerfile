@@ -1,0 +1,7 @@
+FROM openjdk:8-jdk-alpine
+EXPOSE 8080
+VOLUME /tmp
+ARG parent-1.0
+COPY  parent-1.0.jar  parent-1.0.jar
+COPY  application.properties  application.properties
+ENTRYPOINT ["java","-jar","/parent-1.0.jar"]
