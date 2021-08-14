@@ -29,12 +29,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         final String requestTokenHeader = request.getHeader("Authorization");
         String username = null;
+        String password = null;
         String jwtToken = null;
         System.out.println(requestTokenHeader);
-        if (requestTokenHeader != null ) {
+        if (requestTokenHeader != null) {
             jwtToken = requestTokenHeader.substring(7);
             try {
                 username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+                password = jwtTokenUtil.getPasswordFromToken(jwtToken);
             } catch (IllegalArgumentException e) {
                 System.out.println("Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
@@ -44,8 +46,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             logger.warn("JWT Token is null");
         }
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(username);
+        if (username != null && password !=null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = jwtUserDetailsService.loadUserByUserpass(username,password);
 
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
